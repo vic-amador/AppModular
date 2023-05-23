@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1094751282763",
+    "project_id": "modular-db-auth",
+    "storage_bucket": "modular-db-auth.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1094751282763:android:15b88d8f17943e36e08fce",
+        "android_client_info": {
+          "package_name": "com.appmodular"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1094751282763-iai5pqdj2rgnlnoo5i2njc168q9bbdut.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBlkdjSXfJgvA6d_2e7XiZe4zh0NUziBKs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1094751282763-iai5pqdj2rgnlnoo5i2njc168q9bbdut.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
