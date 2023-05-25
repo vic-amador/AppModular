@@ -32,6 +32,7 @@ const Login = ({navigation}) => {
             fontFamily: 'Louis-George-Cafe',
             fontSize: 40,
             marginBottom: 30,
+            marginLeft: 55,
           }}>
           Iniciar Sesión
         </Text>
