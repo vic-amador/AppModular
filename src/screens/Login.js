@@ -18,7 +18,7 @@ const Stack = createNativeStackNavigator();
 const Login = ({navigation}) => {
   return (
     <SafeAreaView style={{flex: 1, justifyContent: 'center'}}>
-      <View style={{paddingHorizontal: 25}}>
+      <View style={{paddingHorizontal: 25, }}>
 
         <View style={{alignItems: 'center'}}>
           <Image
@@ -32,6 +32,7 @@ const Login = ({navigation}) => {
             fontFamily: 'Louis-George-Cafe',
             fontSize: 40,
             marginBottom: 30,
+            color: 'black',
           }}>
           Iniciar Sesión
         </Text>
@@ -44,9 +45,9 @@ const Login = ({navigation}) => {
             paddingBottom: 8,
             marginBottom: 20,
           }}>
-          <FontAwesome name="user-circle" size={27} style={{marginRight: 5}} />
+          <FontAwesome name="user-circle" size={27} style={{marginRight: 5, color:'grey'}} />
           <TextInput
-            style={{flex: 1, paddingVertical: 0}}
+            style={{flex: 1, paddingVertical: 0, color:'black'}}
             placeholder="Usuario"
           />
         </View>
@@ -59,9 +60,9 @@ const Login = ({navigation}) => {
             paddingBottom: 8,
             marginBottom: 30,
           }}>
-          <MaterialIcons name="key" size={27} style={{marginRight: 5}} />
+          <MaterialIcons name="key" size={27} style={{marginRight: 5, color:'grey'}} />
           <TextInput
-            style={{flex: 1, paddingVertical: 0}}
+            style={{flex: 1, paddingVertical: 0, color:'black'}}
             placeholder="Contraseña"
             secureTextEntry={true}
           />
@@ -112,7 +113,7 @@ const Login = ({navigation}) => {
 
         <View style={{marginTop: 40, alignItems:"center"}}>
           <TouchableOpacity onPress={() => navigation.navigate('CreateAcc')}>
-            <Text>No tienes cuenta?,</Text>
+            <Text style={{color:"black"}}>No tienes cuenta?,</Text>
             <Text style={{color:"#ad40af", marginLeft:23}}>crea una!</Text>
           </TouchableOpacity>
         </View>
