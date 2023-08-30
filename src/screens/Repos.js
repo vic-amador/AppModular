@@ -8,7 +8,7 @@ const options = {
   bucket: "imageprocess",
   region: "us-east-1",
   accessKey: "AKIAS6HBXBRRLQUJLIPE",
-  secretKey: "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",
+  secretKey: "",
   successActionStatus: 201,
 };
 
