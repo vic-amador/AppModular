@@ -1,24 +1,81 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import { View, Text, TextInput, Button, FlatList, StyleSheet, Image } from 'react-native';
-import ImagePicker from 'react-native-image-picker';
+import {launchImageLibrary} from 'react-native-image-picker';
+import AWS from 'aws-sdk';
+import { RNS3 } from 'react-native-aws3';
 
 const Chat = () => {
   const [inputText, setInputText] = useState('');
   const [messages, setMessages] = useState([]);
   const [selectedImage, setSelectedImage] = useState(null);
 
-  const ngrokUrl = 'https://9457-2806-2f0-5001-dab6-87b-d994-cdc6-79c9.ngrok.io';
+  const awsOptions = {
+    keyPrefix: 'img/', 
+    bucket: 'imageprocess',
+    region: 'us-east-1', 
+    accessKey: 'AKIAS6HBXBRRJS2HATQR',
+    secretKey: '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',
+    successActionStatus: 201,
+  };
+
+  const ngrokUrl = 'https://31ed-2806-2f0-51e0-ad30-d03a-cb8d-85c8-b61.ngrok.io';
 
   const handleImageUpload = () => {
-    ImagePicker.showImagePicker({ title: 'Seleccionar imagen' }, response => {
+    launchImageLibrary({ title: 'Seleccionar imagen' }, response => {
+      console.log('Image selected:', response.assets[0].uri);
       if (response.didCancel) {
         console.log('El usuario canceló la selección de imagen');
       } else if (response.error) {
         console.log('Error al seleccionar imagen:', response.error);
       } else {
-        setSelectedImage(response.uri);
+        uploadImageToS3(response.assets[0].uri);
       }
     });
+  };
+
+  const uploadImageToS3 = async (imageUri) => {
+    const file = {
+      uri: imageUri,
+      name: `image_${Date.now()}.jpg`,
+      type: 'image/jpeg',
+    };
+
+    const options = {
+      ...awsOptions,
+      key: `${awsOptions.keyPrefix}${file.name}`,
+      contentType: file.type,
+    };
+
+    try {
+      const response = await RNS3.put(file, options);
+      console.log('Response from AWS S3:', response);
+      if (response.status === 201) {
+        const imageUrl = response.body.postResponse.location;
+        sendImageURLToRasa(imageUrl);
+      } else {
+        console.error('Error al subir imagen:', response.body);
+      }
+    } catch (error) {
+      console.error('Error al subir imagen:', error);
+    }
+  };
+
+  const sendImageURLToRasa = async (imageUrl) => {
+    try {
+      const response = await fetch(`${ngrokUrl}/webhooks/rest/webhook`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          imageUrl: imageUrl,
+        }),
+      });
+
+    } catch (error) {
+      console.error('Error al enviar URL de imagen a Rasa:', error);
+    }
   };
 
   const sendMessageToRasa = async () => {
@@ -32,17 +89,19 @@ const Chat = () => {
           message: inputText,
         }),
       });
-
+  
       const data = await response.json();
-
-      const botReply = data && data.length > 0 ? data[0].text : 'Disculpa hubo un error, puedes volver a escribir...';
-
-      setMessages(prevMessages => [
-        ...prevMessages,
+  
+      const botReplies = data && data.length > 0 ? data.map(item => item.text) : ['Disculpa hubo un error, puedes volver a escribir...'];
+  
+      const newMessages = [
+        ...messages,
         { text: inputText, sender: 'user' },
-        { text: botReply, sender: 'bot' },
-      ]);
-
+        ...botReplies.map(reply => ({ text: reply, sender: 'bot' })),
+      ];
+  
+      setMessages(newMessages);
+  
       setInputText('');
       setSelectedImage(null);
     } catch (error) {
