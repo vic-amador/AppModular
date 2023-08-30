@@ -20,6 +20,7 @@
     "prop-types": "^15.8.1",
     "react": "18.2.0",
     "react-native": "^0.71.8",
+    "react-native-aws3": "^0.0.9",
     "react-native-gesture-handler": "^2.10.1",
     "react-native-image-picker": "^5.3.1",
     "react-native-permissions": "^3.8.0",

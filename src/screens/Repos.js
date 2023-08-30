@@ -1,10 +1,12 @@
 import { View, Text } from 'react-native'
 import React from 'react'
 
-export default function Repos() {
+const RestoreAcc = () => {
   return (
     <View>
-      <Text>Repos</Text>
+      <Text>RestoreAcc</Text>
     </View>
   )
 }
+
+export default RestoreAcc
