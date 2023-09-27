@@ -30,7 +30,6 @@ const CreateAcc = ({navigation}) => {
           fontFamily: 'Louis-George-Cafe',
           fontSize: 40,
           marginBottom: 30,
-          color:'black'
         }}>
         Crear cuenta nueva
       </Text>
@@ -43,9 +42,9 @@ const CreateAcc = ({navigation}) => {
           paddingBottom: 8,
           marginBottom: 20,
         }}>
-        <MaterialIcons2 name="alternate-email" size={27} style={{marginRight: 5, color:'grey'}} />
+        <MaterialIcons2 name="alternate-email" size={27} style={{marginRight: 5}} />
         <TextInput
-          style={{flex: 1, paddingVertical: 0, color:'black'}}
+          style={{flex: 1, paddingVertical: 0}}
           placeholder="Correo electrónico"
         />
       </View>
@@ -58,9 +57,9 @@ const CreateAcc = ({navigation}) => {
           paddingBottom: 8,
           marginBottom: 20,
         }}>
-        <FontAwesome name="user-circle" size={27} style={{marginRight: 5, color:'grey'}} />
+        <FontAwesome name="user-circle" size={27} style={{marginRight: 5}} />
         <TextInput
-          style={{flex: 1, paddingVertical: 0, color:'black'}}
+          style={{flex: 1, paddingVertical: 0}}
           placeholder="Nombre de usuario"
         />
       </View>
@@ -73,9 +72,9 @@ const CreateAcc = ({navigation}) => {
           paddingBottom: 8,
           marginBottom: 30,
         }}>
-        <MaterialIcons name="key" size={27} style={{marginRight: 5, color:'grey'}} />
+        <MaterialIcons name="key" size={27} style={{marginRight: 5}} />
         <TextInput
-          style={{flex: 1, paddingVertical: 0, color:'black'}}
+          style={{flex: 1, paddingVertical: 0}}
           placeholder="Contraseña"
           secureTextEntry={true}
         />
@@ -138,6 +137,7 @@ const CreateAcc = ({navigation}) => {
     </View>
   </SafeAreaView>
   )
+  
 }
 
 export default CreateAcc
