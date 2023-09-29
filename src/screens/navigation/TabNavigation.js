@@ -20,7 +20,7 @@ const TabNavigator = () => {
         tabBarShowLabel: false,
         tabBarStyle: {backgroundColor: '#812628'},
         tabBarInactiveTintColor: '#fff',
-        tabBarActiveTintColor: 'yellow',
+        tabBarActiveTintColor: 'gray',
       }}>
       <Tab.Screen
         name="Intro-Welcome"

@@ -1,7 +1,9 @@
 import React, {useState, useRef} from 'react';
-import {View, Text, TextInput, Button, FlatList, StyleSheet, Image,} from 'react-native';
+import {View, Text, TextInput, Button, FlatList, StyleSheet, Image, TouchableOpacity} from 'react-native';
 import {launchImageLibrary} from 'react-native-image-picker';
 import { RNS3 } from 'react-native-aws3';
+
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const Chat = () => {
   const [inputText, setInputText] = useState('');
@@ -21,7 +23,7 @@ const Chat = () => {
   };
 
   const ngrokUrl =
-    'https://b391-2806-2f0-5001-f35f-c803-9b17-dfa4-4528.ngrok.io';
+    'https://476c-2806-2f0-5001-f35f-8024-b613-c2e4-e877.ngrok.io';
 
   const handleImageUpload = () => {
     const options = {
@@ -200,13 +202,47 @@ const Chat = () => {
         onScrollEnd={onScrollEnd}
       />
       <View style={styles.inputContainer}>
-        <Button title="Subir imagen" onPress={handleImageUpload} />
+        <TouchableOpacity onPress={handleImageUpload} style={{
+            backgroundColor: '#812628',
+            padding: 8,
+            width: '25%',
+            borderRadius: 5,
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+          }}>
+          <Text
+            style={{
+              fontFamily: 'Louis-George-Cafe',
+              fontSize: 18,
+              color: 'white',
+            }}>
+            Imagen
+          </Text>
+          <Ionicons name="arrow-up-sharp" size={22} color="white" />
+        </TouchableOpacity>
         <TextInput
           style={styles.input}
           value={inputText}
           onChangeText={text => setInputText(text)}
         />
-        <Button title="Enviar" onPress={sendMessageToRasa} />
+        <TouchableOpacity onPress={sendMessageToRasa} style={{
+            backgroundColor: '#812628',
+            padding: 8,
+            width: '18%',
+            borderRadius: 5,
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            marginLeft: 0
+          }}>
+          <Text
+            style={{
+              fontFamily: 'Louis-George-Cafe',
+              fontSize: 18,
+              color: 'white',
+            }}>
+            Enviar
+          </Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -215,7 +251,7 @@ const Chat = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 10,
+    padding: 8,
     backgroundColor: '#FFFFFF',
   },
   message: {
@@ -225,21 +261,22 @@ const styles = StyleSheet.create({
   },
   userMessage: {
     alignSelf: 'flex-end',
-    backgroundColor: '#DDF4C7',
+    backgroundColor: '#983D3A',
   },
   botMessage: {
     alignSelf: 'flex-start',
-    backgroundColor: '#E2E2E2',
+    backgroundColor: '#818181',
   },
   messageText: {
     fontSize: 16,
+    color: "white"
   },
   inputContainer: {
     flexDirection: 'row',
     alignItems: 'center',
     borderTopWidth: 1,
-    borderColor: '#CCCCCC',
-    paddingTop: 10,
+    borderColor: '#818181',
+    paddingTop: 7,
   },
   input: {
     flex: 1,
@@ -247,8 +284,10 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#CCCCCC',
     borderRadius: 5,
-    marginRight: 10,
+    marginRight: 8,
+    marginLeft: 8,
     paddingLeft: 10,
+    color: "black"
   },
   imageContainer: {
     alignItems: 'center',

@@ -1,33 +1,41 @@
 {
   "project_info": {
-    "project_number": "1094751282763",
-    "project_id": "modular-db-auth",
-    "storage_bucket": "modular-db-auth.appspot.com"
+    "project_number": "58109736951",
+    "project_id": "authappproject-c439c",
+    "storage_bucket": "authappproject-c439c.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1094751282763:android:15b88d8f17943e36e08fce",
+        "mobilesdk_app_id": "1:58109736951:android:75dbae64a1e186bee360f2",
         "android_client_info": {
           "package_name": "com.appmodular"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1094751282763-iai5pqdj2rgnlnoo5i2njc168q9bbdut.apps.googleusercontent.com",
+          "client_id": "58109736951-36cqvcnn94b6r3gtdcqv9j8tqklpko7d.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.appmodular",
+            "certificate_hash": "9c77e01887626c5741f82ad78a3702f693d5fff9"
+          }
+        },
+        {
+          "client_id": "58109736951-5qj55001ddahhaefpb12mvr257g48l8k.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBlkdjSXfJgvA6d_2e7XiZe4zh0NUziBKs"
+          "current_key": "AIzaSyBqkFNhCvrq8_lLNLDCnfkABGuqRMr21Eg"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "1094751282763-iai5pqdj2rgnlnoo5i2njc168q9bbdut.apps.googleusercontent.com",
+              "client_id": "58109736951-5qj55001ddahhaefpb12mvr257g48l8k.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

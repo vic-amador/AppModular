@@ -15,7 +15,7 @@ import MaterialIcons2 from 'react-native-vector-icons/MaterialIcons';
 
 const CreateAcc = ({navigation}) => {
   return (
-    <SafeAreaView style={{flex: 1, justifyContent: 'center'}}>
+    <SafeAreaView style={{flex: 1, justifyContent: 'center', backgroundColor: "#DCDCDC"}}>
     <View style={{paddingHorizontal: 25}}>
 
       <View style={{alignItems: 'center'}}>
@@ -30,6 +30,7 @@ const CreateAcc = ({navigation}) => {
           fontFamily: 'Louis-George-Cafe',
           fontSize: 40,
           marginBottom: 30,
+          color: "black",
         }}>
         Crear cuenta nueva
       </Text>
@@ -41,10 +42,11 @@ const CreateAcc = ({navigation}) => {
           borderBottomWidth: 0.8,
           paddingBottom: 8,
           marginBottom: 20,
+          color: "grey"
         }}>
-        <MaterialIcons2 name="alternate-email" size={27} style={{marginRight: 5}} />
+        <MaterialIcons2 name="alternate-email" size={27} style={{marginRight: 5, color: "grey"}} />
         <TextInput
-          style={{flex: 1, paddingVertical: 0}}
+          style={{flex: 1, paddingVertical: 0, color: "black"}}
           placeholder="Correo electrónico"
         />
       </View>
@@ -57,9 +59,9 @@ const CreateAcc = ({navigation}) => {
           paddingBottom: 8,
           marginBottom: 20,
         }}>
-        <FontAwesome name="user-circle" size={27} style={{marginRight: 5}} />
+        <FontAwesome name="user-circle" size={27} style={{marginRight: 5, color: "grey"}} />
         <TextInput
-          style={{flex: 1, paddingVertical: 0}}
+          style={{flex: 1, paddingVertical: 0, color: "grey"}}
           placeholder="Nombre de usuario"
         />
       </View>
@@ -72,9 +74,9 @@ const CreateAcc = ({navigation}) => {
           paddingBottom: 8,
           marginBottom: 30,
         }}>
-        <MaterialIcons name="key" size={27} style={{marginRight: 5}} />
+        <MaterialIcons name="key" size={27} style={{marginRight: 5, color: "grey"}} />
         <TextInput
-          style={{flex: 1, paddingVertical: 0}}
+          style={{flex: 1, paddingVertical: 0, color: "black"}}
           placeholder="Contraseña"
           secureTextEntry={true}
         />
@@ -95,9 +97,9 @@ const CreateAcc = ({navigation}) => {
             );
           }}
           style={{
-            backgroundColor: '#ad40af',
+            backgroundColor: '#7FFFD4',
             padding: 10,
-            width: '34%',
+            width: '30%',
             borderRadius: 5,
             flexDirection: 'row',
             justifyContent: 'space-between',
@@ -106,7 +108,7 @@ const CreateAcc = ({navigation}) => {
             style={{
               fontFamily: 'Louis-George-Cafe',
               fontSize: 20,
-              color: 'white',
+              color: 'black',
             }}>
             Guardar datos
           </Text>
@@ -115,13 +117,13 @@ const CreateAcc = ({navigation}) => {
         <TouchableOpacity
           onPress={() => navigation.navigate('Login') }
           style={{
-            backgroundColor: '#812628',
+            backgroundColor: '#9932CC',
             padding: 10,
-            width: '34%',
+            width: '30%',
             borderRadius: 5,
             flexDirection: 'row',
             justifyContent: 'space-between',
-            marginLeft: 100
+            marginLeft: 145
           }}>
           <Text
             style={{

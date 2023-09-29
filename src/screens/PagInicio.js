@@ -18,7 +18,7 @@ export default function PagInicio() {
             justifyContent: 'space-between',
             marginBottom: 20,
           }}>
-          <Text style={{fontSize: 17, fontFamily: 'couture-bld'}}>
+          <Text style={{fontSize: 17, fontFamily: 'couture-bld', color: "black"}}>
             Hola 'Usuario'
           </Text>
           <ImageBackground

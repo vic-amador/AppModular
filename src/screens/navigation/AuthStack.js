@@ -85,7 +85,7 @@ export default function AuthStack() {
       />
       <Drawer.Screen
         component={Repos}
-        name="Repos"
+        name="Reportes"
         options={{
           drawerIcon: ({color}) => (
             <Ionicons name="ios-notifications-outline" size={22} color={color} />
@@ -94,7 +94,7 @@ export default function AuthStack() {
       />
       <Drawer.Screen
         component={MyInfo}
-        name="MyInfo"
+        name="Configuración"
         options={{
           drawerIcon: ({color}) => (
             <Ionicons name="settings-outline" size={22} color={color} />

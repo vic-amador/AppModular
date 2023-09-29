@@ -17,7 +17,7 @@ const Stack = createNativeStackNavigator();
 
 const Login = ({navigation}) => {
   return (
-    <SafeAreaView style={{flex: 1, justifyContent: 'center'}}>
+    <SafeAreaView style={{flex: 1, justifyContent: 'center', backgroundColor: "#DCDCDC"}}>
       <View style={{paddingHorizontal: 25, }}>
 
         <View style={{alignItems: 'center'}}>
@@ -98,7 +98,7 @@ const Login = ({navigation}) => {
               borderRadius: 5,
               flexDirection: 'row',
               justifyContent: 'space-between',
-              marginLeft: 100
+              marginLeft: 115
             }}>
             <Text
               style={{

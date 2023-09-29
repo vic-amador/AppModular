@@ -14,6 +14,10 @@ import React from 'react';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const CustomDrawer = props => {
+  const handleLogout = () => {
+    // Navega a la pantalla de inicio de sesión cuando se presiona "Cerrar sesión"
+    props.navigation.navigate('Login'); // Usar props.navigation
+  };
   return (
     <View style={{flex: 1}}>
       <DrawerContentScrollView
@@ -41,14 +45,15 @@ const CustomDrawer = props => {
       </DrawerContentScrollView>
       <View
         style={{padding: 10, borderTopWidth: 0.8, borderTopColor: 'black'}}>
-        <TouchableOpacity onPress={() => {}} style={{paddingVertical: 15}}>
+        <TouchableOpacity onPress={handleLogout} style={{paddingVertical: 15}}>
           <View style={{flexDirection: 'row', alignItems: 'center'}}>
-            <Ionicons name="exit-outline" size={22} />
+            <Ionicons name="exit-outline" size={22} color="black" />
             <Text
               style={{
                 fontSize: 15,
                 fontFamily: 'Roboto-Medium',
                 marginLeft: 5,
+                color: "black"
               }}>
               Cerrar sesión
             </Text>
