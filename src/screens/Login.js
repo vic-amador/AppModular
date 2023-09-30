@@ -12,12 +12,50 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import MaterialIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { Button } from 'react-native';
+import auth from '@react-native-firebase/auth';
+import { GoogleSignin } from '@react-native-google-signin/google-signin';
 
 const Stack = createNativeStackNavigator();
 
+
+async function onGoogleButtonPress() {
+  // Check if your device supports Google Play
+  await GoogleSignin.hasPlayServices({ showPlayServicesUpdateDialog: true });
+  // Get the users ID token
+  const { idToken } = await GoogleSignin.signIn();
+
+  // Create a Google credential with the token
+  const googleCredential = auth.GoogleAuthProvider.credential(idToken);
+
+  // Sign-in the user with the credential
+  return auth().signInWithCredential(googleCredential);
+}
+
+async function logOutButtonPress() {
+    // Check if your device supports Google Play
+    await GoogleSignin.hasPlayServices({ showPlayServicesUpdateDialog: true });
+
+    // Sign out from Google Sign-In
+    await GoogleSignin.signOut();
+
+    // Sign out from Firebase
+    await auth().signOut();
+}
 const Login = ({navigation}) => {
+  GoogleSignin.configure({
+    webClientId: '58109736951-5qj55001ddahhaefpb12mvr257g48l8k.apps.googleusercontent.com',
+  });
   return (
-    <SafeAreaView style={{flex: 1, justifyContent: 'center', backgroundColor: "#DCDCDC"}}>
+    <SafeAreaView style={{flex: 1, justifyContent: 'center'}}>
+      <Button
+      title="Google Sign-In"
+      onPress={() => onGoogleButtonPress().then(() => navigation.navigate('Inicio'),console.log('Signed in with Google!'))}
+    />
+      <Button
+      title="Google Sign-Out"
+      onPress={() => logOutButtonPress().then(() => navigation.navigate('Login'),console.log('Signout in with Google!'))}
+    />
       <View style={{paddingHorizontal: 25, }}>
 
         <View style={{alignItems: 'center'}}>
@@ -98,7 +136,7 @@ const Login = ({navigation}) => {
               borderRadius: 5,
               flexDirection: 'row',
               justifyContent: 'space-between',
-              marginLeft: 115
+              marginLeft: 100
             }}>
             <Text
               style={{

@@ -10,14 +10,40 @@ import {
   DrawerItemList,
 } from '@react-navigation/drawer';
 import React from 'react';
+import auth from '@react-native-firebase/auth';
+import { GoogleSignin } from '@react-native-google-signin/google-signin';
 
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
+async function logOutButtonPress() {
+  // Check if your device supports Google Play
+  await GoogleSignin.hasPlayServices({ showPlayServicesUpdateDialog: true });
+
+  // Sign out from Google Sign-In
+  await GoogleSignin.signOut();
+
+  // Sign out from Firebase
+  await auth().signOut();
+}
+
 const CustomDrawer = props => {
-  const handleLogout = () => {
-    // Navega a la pantalla de inicio de sesión cuando se presiona "Cerrar sesión"
-    props.navigation.navigate('Login'); // Usar props.navigation
+  const handleLogout = async () => {
+    try {
+      // Cerrar sesión en Google Sign-In
+      await GoogleSignin.signOut();
+  
+      // Cerrar sesión en Firebase
+      await auth().signOut();
+  
+      // Navega a la pantalla de inicio de sesión
+      props.navigation.navigate('Onboarding');
+    } catch (error) {
+      console.error('Error al cerrar sesión:', error);
+    }
   };
+  GoogleSignin.configure({
+    webClientId: '1094751282763-h02am116fhr5evgb1ibghnnhi8uuu8ni.apps.googleusercontent.com',
+  });
   return (
     <View style={{flex: 1}}>
       <DrawerContentScrollView
