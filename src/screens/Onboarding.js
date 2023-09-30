@@ -30,17 +30,6 @@ async function onGoogleButtonPress() {
   return auth().signInWithCredential(googleCredential);
 }
 
-async function logOutButtonPress() {
-    // Check if your device supports Google Play
-    await GoogleSignin.hasPlayServices({ showPlayServicesUpdateDialog: true });
-
-    // Sign out from Google Sign-In
-    await GoogleSignin.signOut();
-
-    // Sign out from Firebase
-    await auth().signOut();
-}
-
 const Onboarding = ({navigation}) => {
   GoogleSignin.configure({
     webClientId: '1094751282763-h02am116fhr5evgb1ibghnnhi8uuu8ni.apps.googleusercontent.com',

@@ -7,14 +7,9 @@ import {
   Alert,
 } from 'react-native';
 import React from 'react';
-import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {SafeAreaView} from 'react-native-safe-area-context';
 
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import MaterialIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-
-const Stack = createNativeStackNavigator();
 
 const Login = ({navigation}) => {
   return (

@@ -9,24 +9,36 @@ import {
   DrawerContentScrollView,
   DrawerItemList,
 } from '@react-navigation/drawer';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import auth from '@react-native-firebase/auth';
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
+import firebase from '@react-native-firebase/app';
 
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
-async function logOutButtonPress() {
-  // Check if your device supports Google Play
-  await GoogleSignin.hasPlayServices({ showPlayServicesUpdateDialog: true });
-
-  // Sign out from Google Sign-In
-  await GoogleSignin.signOut();
-
-  // Sign out from Firebase
-  await auth().signOut();
-}
-
 const CustomDrawer = props => {
+
+  const [userEmail, setUserEmail] = useState(null);
+  const [userPhotoURL, setUserPhotoURL] = useState(null);
+
+  useEffect(() => {
+    // Comprobar si hay un usuario autenticado
+    const unsubscribe = firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        // Usuario autenticado, obtener correo electrónico e imagen de perfil
+        setUserEmail(user.email);
+        setUserPhotoURL(user.photoURL);
+      } else {
+        // No hay usuario autenticado
+        setUserEmail(null);
+        setUserPhotoURL(null);
+      }
+    });
+
+    // ¡No olvides desuscribirte cuando el componente se desmonte!
+    return () => unsubscribe();
+  }, []);
+
   const handleLogout = async () => {
     try {
       // Cerrar sesión en Google Sign-In
@@ -44,6 +56,7 @@ const CustomDrawer = props => {
   GoogleSignin.configure({
     webClientId: '1094751282763-h02am116fhr5evgb1ibghnnhi8uuu8ni.apps.googleusercontent.com',
   });
+
   return (
     <View style={{flex: 1}}>
       <DrawerContentScrollView
@@ -52,17 +65,24 @@ const CustomDrawer = props => {
         <ImageBackground
           source={require('../assets/Images/Background1.png')}
           style={{padding: 20}}>
-          <Image
-            source={require('../assets/Images/userDef.png')}
-            style={{height: 80, width: 80, borderRadius: 40, marginBottom: 10}}
-          />
+          {userPhotoURL && (
+            <Image
+              source={{ uri: userPhotoURL }}
+              style={{
+                height: 80,
+                width: 80,
+                borderRadius: 40,
+                marginBottom: 10,
+              }}
+            />
+          )}
           <Text
             style={{
               color: 'white',
               fontSize: 18,
               fontFamily: 'BebasNeue-Regular',
             }}>
-            User
+            {userEmail ? userEmail : 'User'}
           </Text>
         </ImageBackground>
         <View style={{flex: 1, backgroundColor: 'white', paddingTop: 10}}>
