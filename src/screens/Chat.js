@@ -23,7 +23,7 @@ const Chat = () => {
   };
 
   const ngrokUrl =
-    'https://476c-2806-2f0-5001-f35f-8024-b613-c2e4-e877.ngrok.io';
+    'https://d93e-2806-2f0-5001-e495-cce3-45eb-4696-84b4.ngrok.io';
 
   const handleImageUpload = () => {
     const options = {

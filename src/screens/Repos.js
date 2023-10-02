@@ -1,68 +1,75 @@
-import React, { useState } from 'react';
-import { View, Button, Image, Text } from 'react-native';
-import { launchImageLibrary } from 'react-native-image-picker';
-import { RNS3 } from 'react-native-aws3';
+import React, { useEffect, useState } from 'react';
+import { View, Text, FlatList, Image, Button, StyleSheet } from 'react-native';
 
-const App = () => {
-  const [selectedImage, setSelectedImage] = useState(null);
-  const selectImage = () => {
-    const options = {
-      mediaType: 'photo', // Asegúrate de especificar el tipo de media como 'photo'
-    };
-    launchImageLibrary(options, (response) => {
-      if (response.didCancel) {
-        console.log('User cancelled image picker');
-      } else if (response.error) {
-        console.log('ImagePicker Error: ', response.error);
-      } else {
-        setSelectedImage(response.assets[0].uri);
+function ReportCell({ report }) {
+  return (
+    <View style={styles.cell}>
+      <Text>ID: {report.reporte_id}</Text>
+      <Text>Nombre: {report.firstName}</Text>
+      <Text>Apellido: {report.lastName}</Text>
+      <Text>Colonia: {report.location_report}</Text>
+      {report.image && (
+        <Image
+          source={{ uri: `data:image/jpeg;base64,${report.image.data}` }}
+          style={styles.image}
+        />
+      )}
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  cell: {
+    backgroundColor: 'white',
+    padding: 10,
+    marginVertical: 5,
+    borderColor: '#ccc',
+    borderWidth: 1,
+    borderRadius: 5,
+  },
+  image: {
+    width: 100,
+    height: 100,
+    marginTop: 10,
+  },
+});
+
+function App() {
+  const [data, setData] = useState([]);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    fetchDataFromAPI();
+  }, []);
+
+  const fetchDataFromAPI = async () => {
+    try {
+      const response = await fetch('http://44.211.143.212:3000/Reportes');
+      if (!response.ok) {
+        throw new Error('No se pudo conectar al servidor.');
       }
-      const imageUrl = '';
-    });
-  };
-
-  const uploadImage = () => {
-    if (selectedImage) {
-      const imageName = selectedImage.split('/').pop(); // Obtener el nombre del archivo de la URL
-      const file = {
-        uri: selectedImage,
-        name: imageName,
-        type: 'image/jpeg',
-      };
-
-      const options = {
-        keyPrefix: "uploads/",
-        bucket: "imagenes-react",
-        region: "us-east-1",
-        accessKey: "AKIAS6HBXBRRHSOJCO6M",
-        secretKey: "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",
-        awsUrl: "s3.amazonaws.com",
-        successActionStatus: 201
-      };
-
-      console.log('imagename: ', file);
-      RNS3.put(file, options)
-        .progress(event => console.log(`Progress: ${event.percent}%`))
-        .then(response => {
-          if (response.status !== 201) {
-            console.log('Failed to upload image to S3', response.body);
-          } else {
-            const objectUrl = response.body.postResponse.location;
-
-            console.log('Image uploaded to S3', response.body);
-            console.log('La url del objeto es', objectUrl);
-          }
-        });
+      const newData = await response.json();
+      console.log(newData);
+      setData(newData);
+      setError(null);
+    } catch (error) {
+      console.error('Error al obtener los datos:', error);
+      setError('Error al obtener los datos. Verifica tu conexión y vuelve a intentarlo.');
     }
   };
 
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      {selectedImage && <Image source={{ uri: selectedImage }} style={{ width: 224, height: 224 }} />}
-      <Button title="Seleccionar imagen" onPress={selectImage} />
-      <Button title="Subir imagen" onPress={uploadImage} disabled={!selectedImage} />
+    <View style={styles.container}>
+      <Text>Tabla de Datos</Text>
+      <Button title="Recargar Datos" onPress={fetchDataFromAPI} />
+      {error && <Text>Error: {error}</Text>}
+      <FlatList
+        data={data}
+        keyExtractor={(item) => (item.reporte_id ? item.reporte_id.toString() : Math.random().toString())}
+        renderItem={({ item }) => <ReportCell report={item} />}
+      />
     </View>
   );
-};
+}
 
 export default App;
